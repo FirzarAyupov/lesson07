@@ -6,7 +6,7 @@ public class VendingMachine {
     private static int balance;
     private Scanner scn = new Scanner(System.in);
 
-    public void Start() {
+    public void start() {
         this.mainMenu();
     }
 

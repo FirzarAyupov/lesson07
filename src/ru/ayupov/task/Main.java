@@ -22,7 +22,7 @@ public class Main {
 
         VendingMachine vendingMachine = new VendingMachine();
 
-        vendingMachine.Start();
+        vendingMachine.start();
 
     }
 }
