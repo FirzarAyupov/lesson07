@@ -1,17 +1,25 @@
 package ru.ayupov.task;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Scanner;
 
 public class VendingMachine {
+    private static final Logger log = LogManager.getLogger(VendingMachine.class);
+
     private static int balance;
     private Scanner scn = new Scanner(System.in);
 
     public void start() {
+        log.trace("запуск вендинга");
         this.mainMenu();
     }
 
 
     private void mainMenu() {
+
+        log.trace("переход в главное меню");
 
         System.out.println("Введите номер команды:");
         System.out.println("1. Посмотреть меню");
@@ -29,6 +37,7 @@ public class VendingMachine {
                     addMoney();
                     break;
                 case 3:
+                    log.trace("выход");
                     break;
             }
         } else {
@@ -38,6 +47,7 @@ public class VendingMachine {
     }
 
     private void drinksMenu() {
+        log.trace("переход в меню напитков");
         System.out.println("Выберите напиток и введите его номер");
         for (Drinks drink : Drinks.values()) {
             System.out.println((drink.ordinal() + 1) + ". " + drink.title + " " + drink.price + " руб.");
@@ -58,7 +68,7 @@ public class VendingMachine {
             if (drink.ordinal() == drinkNum) {
                 if (drink.price > balance) {
 
-                    System.out.println("Недостаточно средств");
+                    log.warn("Недостаточно средств");
 
                     printBalance();
                     mainMenu();
@@ -102,6 +112,6 @@ public class VendingMachine {
     }
 
     private void incorrectValue() {
-        System.out.println("Введено некорректное значение. Пожалуйста повторите попытку");
+        log.error("Введено некорректное значение. Пожалуйста повторите попытку");
     }
 }
